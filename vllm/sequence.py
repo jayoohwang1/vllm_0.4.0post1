@@ -386,6 +386,7 @@ class SequenceGroup:
         self.prompt_logprobs: Optional[PromptLogprobs] = None
         self.state = SequenceGroupState()
         self.multi_modal_data = multi_modal_data
+        self.value_estimate = None
 
     @property
     def prompt(self) -> str:
@@ -543,6 +544,7 @@ class SequenceGroupMetadata:
         self.multi_modal_data = multi_modal_data
         self.state = SequenceGroupState() if state is None else state
         self._token_chunk_size = token_chunk_size
+        self.value_estimate = None
 
         if self._token_chunk_size is None:
             if is_prompt:
@@ -605,6 +607,7 @@ class SequenceGroupOutput:
     ) -> None:
         self.samples = samples
         self.prompt_logprobs = prompt_logprobs
+        self.value_estimate = None
 
     def __repr__(self) -> str:
         return (f"SequenceGroupOutput(samples={self.samples}, "

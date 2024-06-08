@@ -481,6 +481,8 @@ class Scheduler:
                 multi_modal_data=seq_group.multi_modal_data
                 if scheduler_outputs.prompt_run else None,
             )
+            if seq_group.value_estimate is not None:
+                seq_group_metadata.value_estimate = seq_group.value_estimate
             seq_group_metadata_list.append(seq_group_metadata)
 
         # Now that the batch has been created, we can assume all blocks in the

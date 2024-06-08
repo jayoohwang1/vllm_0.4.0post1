@@ -424,6 +424,9 @@ class LLMEngine:
                 seq_group, prompt_logprobs)
             seq_group.prompt_logprobs = prompt_logprobs
 
+        # if hasattr(self.model_config.hf_config, "value_model") and self.model_config.hf_config.value_model:
+        if outputs.value_estimate is not None:
+            seq_group.value_estimate = outputs.value_estimate
         # Process samples
         samples = outputs.samples
         parent_seqs = seq_group.get_seqs(status=SequenceStatus.RUNNING)

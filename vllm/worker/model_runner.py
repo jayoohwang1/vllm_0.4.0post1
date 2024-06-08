@@ -674,6 +674,13 @@ class ModelRunner:
             logits=logits,
             sampling_metadata=sampling_metadata,
         )
+
+        if hasattr(self.model.config, "value_model") and attn_metadata.is_prompt and self.model.config.value_model:
+            values = self.model.v_head(hidden_states)
+
+            for idx, sequencegroupoutput in enumerate(output.outputs):
+                sequencegroupoutput.value_estimate = values[attn_metadata.seq_start_loc[idx+1] - 1].item()
+
         return output
 
     @torch.inference_mode()

@@ -92,6 +92,8 @@ def get_model(model_config: ModelConfig, device_config: DeviceConfig,
                 else:
                     model = model_class(model_config.hf_config,
                                         vision_language_config, linear_method)
+        if hasattr(model_config.hf_config, "value_model") and model_config.hf_config.value_model:
+            model = ModelRegistry.load_model_cls("AutoModelForCausalLMWithValueHead")(model)
         if model_config.load_format == "dummy":
             # NOTE(woosuk): For accurate performance evaluation, we assign
             # random values to the weights.

@@ -53,6 +53,7 @@ _MODELS = {
     "StableLmForCausalLM": ("stablelm", "StablelmForCausalLM"),
     "Starcoder2ForCausalLM": ("starcoder2", "Starcoder2ForCausalLM"),
     "XverseForCausalLM": ("xverse", "XverseForCausalLM"),
+    "AutoModelForCausalLMWithValueHead": ("modeling_value_head", "AutoModelForCausalLMWithValueHead"),
 }
 
 # Models not supported by ROCm.
