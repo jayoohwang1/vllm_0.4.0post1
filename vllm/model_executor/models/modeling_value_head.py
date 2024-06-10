@@ -69,6 +69,10 @@ class ValueHead(nn.Module):
         if output.dtype != self.summary.weight.dtype:
             output = output.to(self.summary.weight.dtype)
 
+        if output.device == 'cpu':
+            print(f"ValueHead: output.device == 'cpu'")
+            output.to(torch.float32)
+
         output = self.summary(output)
         values = torch.tanh(output).squeeze(-1)
         return values
