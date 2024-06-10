@@ -53,7 +53,7 @@ class ValueHead(nn.Module):
                 if hasattr(config.decoder, "hidden_size"):
                     hidden_size = config.decoder.hidden_size
 
-        self.summary = nn.Linear(hidden_size, 1)  #.float()
+        self.summary = nn.Linear(hidden_size, 1).float()
 
         self.flatten = nn.Flatten()
 
@@ -63,12 +63,12 @@ class ValueHead(nn.Module):
             hidden_states = hidden_states.to(self.summary.weight.device)
         
         # DEBUG
-        cuda0 = torch.device('cuda:0')
-        if hidden_states.device != cuda0 or self.summary.weight.device != cuda0:
-          hidden_states.to(cuda0)
-          self.summary.weight.to(cuda0)
-        print(f"\nDEBUG")
-        print(f"hidden_states: {hidden_states.device}, layer: {self.summary.weight.device}")
+        # cuda0 = torch.device('cuda:0')
+        # if hidden_states.device != cuda0 or self.summary.weight.device != cuda0:
+        #   hidden_states.to(cuda0)
+        #   self.summary.weight.to(cuda0)
+        # print(f"\nDEBUG")
+        # print(f"hidden_states: {hidden_states.device}, layer: {self.summary.weight.device}")
       
         output = self.dropout(hidden_states)
 
@@ -80,7 +80,7 @@ class ValueHead(nn.Module):
         # if output.device == 'cpu':
         #     print(f"ValueHead: output.device == 'cpu'")
         #     output.to(torch.float32)
-        # output.to(torch.float32)
+        output.to(torch.float32)
         print(f"output dtype={output.dtype}, layer dtype={self.summary.weight.dtype}\n")
       
         output = self.summary(output)
