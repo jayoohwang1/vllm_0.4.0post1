@@ -81,7 +81,7 @@ class ValueHead(nn.Module):
         #     print(f"ValueHead: output.device == 'cpu'")
         #     output.to(torch.float32)
         output.to(torch.float32)
-        print(f"output dtype={output.dtype}, layer dtype={self.summary.weight.dtype}\n")
+        # print(f"output dtype={output.dtype}, layer dtype={self.summary.weight.dtype}\n")
       
         output = self.summary(output)
         values = torch.tanh(output).squeeze(-1)
