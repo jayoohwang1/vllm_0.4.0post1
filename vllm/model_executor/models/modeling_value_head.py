@@ -61,7 +61,9 @@ class ValueHead(nn.Module):
 
         if hidden_states.device != self.summary.weight.device:
             hidden_states = hidden_states.to(self.summary.weight.device)
-
+        # DEBUG
+        print(f"hidden_states: {hidden_states.device} layer: {self.summary.weight.device}")
+      
         output = self.dropout(hidden_states)
 
         # For now force upcast in fp32 if needed. Let's keep the
