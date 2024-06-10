@@ -63,9 +63,10 @@ class ValueHead(nn.Module):
             hidden_states = hidden_states.to(self.summary.weight.device)
         
         # DEBUG
-        if hidden_states.device != 'cuda' or self.summary.weight.device != 'cuda':
-          hidden_states.to('cuda')
-          self.summary.weight.to('cuda')
+        cuda0 = torch.device('cuda:0')
+        if hidden_states.device != cuda0 or self.summary.weight.device != cuda0:
+          hidden_states.to(cuda0)
+          self.summary.weight.to(cuda0)
         print(f"\nDEBUG")
         print(f"hidden_states: {hidden_states.device}, layer: {self.summary.weight.device}")
       
