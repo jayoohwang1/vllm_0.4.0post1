@@ -62,6 +62,7 @@ class ValueHead(nn.Module):
         if hidden_states.device != self.summary.weight.device:
             hidden_states = hidden_states.to(self.summary.weight.device)
         # DEBUG
+        print(f"\nDEBUG")
         print(f"hidden_states: {hidden_states.device} layer: {self.summary.weight.device}")
       
         output = self.dropout(hidden_states)
@@ -75,6 +76,7 @@ class ValueHead(nn.Module):
             print(f"ValueHead: output.device == 'cpu'")
             output.to(torch.float32)
         output.to(torch.float32)
+        print(f"output dtype={output.dtype}, layer dtype={self.summary.weight.dtype}\n")
       
         output = self.summary(output)
         values = torch.tanh(output).squeeze(-1)
