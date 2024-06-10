@@ -53,7 +53,7 @@ class ValueHead(nn.Module):
                 if hasattr(config.decoder, "hidden_size"):
                     hidden_size = config.decoder.hidden_size
 
-        self.summary = nn.Linear(hidden_size, 1)
+        self.summary = nn.Linear(hidden_size, 1).float()
 
         self.flatten = nn.Flatten()
 
