@@ -26,7 +26,7 @@ from vllm.sequence import SamplerOutput
 
 KVCache = Tuple[torch.Tensor, torch.Tensor]
 
-V_HEAD_WEIGHTS_NAME = "value_head.pth"
+V_HEAD_WEIGHTS_NAME = "value_head.safetensors"
 
 
 class ValueHead(nn.Module):
